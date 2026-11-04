@@ -1,17 +1,47 @@
 %include "asm_io.inc"
 
+segment .data
+    msg1    db  "Enter a number: ", 0
+    msg2    db  "The sum of ", 0
+    msg3    db  " and ", 0
+    msg4    db  " is: ", 0
+
+segment .bss
+    integer1    resd  1   ; first integer
+    integer2    resd  1   ; second integer
+    result      resd  1   ; result
+
 segment .text
     global asm_main
 asm_main:
-    enter   0,0
+    enter       0,0
     pusha
 
-    call    read_int
-    push    eax
-    call    read_int
-    pop     ebx
-    add     eax, ebx
+    mov     eax, msg1
+    call    print_string
+    call    read_int              ; read the first integer
+    mov     [integer1], eax
 
+    mov     eax, msg1
+    call    print_string
+    call    read_int              ; read the second integer
+    mov     [integer2], eax
+
+    mov     eax, [integer1]
+    add     eax, [integer2]
+    mov     [result], eax
+
+    mov     eax, msg2
+    call    print_string
+    mov     eax, [integer1]
+    call    print_int
+    mov     eax, msg3
+    call    print_string
+    mov     eax, [integer2]
+    call    print_int
+    mov     eax, msg4
+    call    print_string
+    mov     eax, [result]
     call    print_int
     call    print_nl
 

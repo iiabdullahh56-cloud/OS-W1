@@ -1,25 +1,24 @@
 %include "asm_io.inc"
 
 segment .data
-    val1    dd  10
-    val2    dd  15
-    sum     dd  0
+    integer1    dd   15     ; first int
+    integer2    dd   6      ; second int
+
+segment .bss
+    result      resd 1      ; result
 
 segment .text
     global asm_main
 asm_main:
-    enter   0,0
+    enter       0,0
     pusha
 
-    mov     eax, [val1]
-    add     eax, [val2]
-    mov     [sum], eax
-
-    mov     eax, [sum]
-    call    print_int
-    call    print_nl
+    mov         eax, [integer1]   ; eax = int1
+    add         eax, [integer2]   ; eax = int1 + int2
+    mov         [result], eax     ; result = int1 + int2
+    call        print_int         ; print result
 
     popa
-    mov     eax, 0
+    mov         eax, 0
     leave
     ret
