@@ -4,9 +4,9 @@
 `task1.asm` adds two integers stored in global memory and prints the result using `print_int`.
 
 ​```nasm
-mov eax, [val1]
-add eax, [val2]
-mov [sum], eax
+mov eax, [integer1]
+add eax, [integer2]
+mov [result], eax
 ​```
 
 Output of `./task1`:
